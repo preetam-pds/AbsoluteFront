@@ -1,0 +1,51 @@
+name: GitHub-Actions-Demo
+
+on:
+  push:
+    branches:
+      - test
+
+env:
+  AWS_REGION: ap-south-1
+  LAMBDA_FUNCTION_NAME: Absolute
+  ZIP_FILE_NAME: mycode.zip
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Build function
+        run: sam build
+
+      - name: check build folder
+        run: cd .aws-sam/build && ls -all
+
+      - name: Install zip
+        uses: montudor/action-zip@v1  
+
+      - name: Zip output
+        run: zip -rv mycode.zip . -i build/AddStoreFunction/* build/BulkInsertStoresFunction/* build/GetAllStoresFunction/* build/LoginFunction/* build/template.yaml 
+        working-directory: .aws-sam
+      
+      - name: List Files
+        run: cd .aws-sam && ls -all
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update Lambda function code
+        run: aws lambda update-function-code --function-name Absolute --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode.zip
+         
