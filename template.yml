@@ -1,0 +1,171 @@
+# This is the SAM template that represents the architecture of your serverless application
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html
+
+# The AWSTemplateFormatVersion identifies the capabilities of the template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  aws-sam-typescript-layers-example
+
+# Transform section specifies one or more macros that AWS CloudFormation uses to process your template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Globals:
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"
+  Function:
+    Layers:
+      - !Ref RuntimeDependenciesLayer
+    Environment:
+      Variables:
+        STORE_TABLE: clk-star-store-data-dev
+    Runtime: nodejs18.x
+    MemorySize: 128
+    Timeout: 100
+Resources:
+  getAllStoresFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          TABLE_NAME: clk-star-store-data-dev
+          REGION: eu-west-1
+      Handler: dist/handlers/get-all-stores.getAllStoresHandler
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /stores
+            Method: GET
+  loginFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          TABLE_NAME: clk-star-store-data-dev
+          REGION: eu-west-1
+      Handler: dist/handlers/login.loginHandler
+      Timeout: 25 # Chosen to be less than the default SQS Visibility Timeout of 30 seconds
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        AddStore:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: post
+  addStoreFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          TABLE_NAME: clk-star-store-data-dev
+          REGION: eu-west-1
+      Handler: dist/handlers/add-store.addStoreHandler
+      Timeout: 25 # Chosen to be less than the default SQS Visibility Timeout of 30 seconds
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        AddStore:
+          Type: Api
+          Properties:
+            Path: /stores
+            Method: post
+  updateStoreFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          TABLE_NAME: clk-star-store-data-dev
+          REGION: eu-west-1
+      Handler: dist/handlers/update-store.updateStoreHandler
+      Timeout: 25 # Chosen to be less than the default SQS Visibility Timeout of 30 seconds
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        AddStore:
+          Type: Api
+          Properties:
+            Path: /stores/{store_id}
+            Method: put
+  sendEmailFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          REGION: eu-west-1
+      Handler: dist/handlers/send-email.sendEmailHandler
+      Timeout: 25 # Chosen to be less than the default SQS Visibility Timeout of 30 seconds
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        AddStore:
+          Type: Api
+          Properties:
+            Path: /email-notifications
+            Method: post
+  bulkInsertStoresFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Environment:
+        Variables:
+          TABLE_NAME: clk-star-store-data-dev
+          REGION: eu-west-1
+      Handler: dist/handlers/bulk-insert-stores.bulkInsertStoresHandler
+      Timeout: 25
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        AddStore:
+          Type: Api
+          Properties:
+            Path: /bulk-insert-stores
+            Method: post
+  StoreTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: clk-star-store-data-dev
+      AttributeDefinitions:
+        - AttributeName: store_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: store_id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+  RuntimeDependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Description: Runtime dependencies for Lambdas
+      ContentUri: ./
+      CompatibleRuntimes:
+        - nodejs18.x
+      RetentionPolicy: Retain
+Outputs:
+  WebEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
