@@ -31,7 +31,7 @@ jobs:
 
 
       - name: Build function
-        run: sam build -u
+        run: sam build
 
       - name: check build folder
         run: cd .aws-sam/build && ls -all
