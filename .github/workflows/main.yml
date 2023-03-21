@@ -36,7 +36,7 @@ jobs:
         run: sudo apt-get install libselinux1-dev
 
       - name: Build function
-        run: sam build
+        run: sam build -u
 
       - name: check build folder
         run: cd .aws-sam/build && ls -all
