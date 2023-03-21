@@ -25,6 +25,9 @@ jobs:
 
       - name: install
         run: sudo apt-get install -y make
+      
+      - name: install mkdir
+        run: sudo apt-get install --reinstall coreutils
 
       - name: Build function
         run: sam build
