@@ -33,7 +33,7 @@ jobs:
         run: apt-cache search libselinux
 
       - name: Install libselinux
-        run: sudo apt-get install libselinux1
+        run: sudo apt-get install libselinux1-dev
 
       - name: Build function
         run: sam build
