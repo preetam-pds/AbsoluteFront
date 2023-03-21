@@ -32,6 +32,9 @@ jobs:
       - name: update libselinux1
         run: apt-cache search libselinux
 
+      - name: Install libselinux
+        run: sudo apt-get install libselinux1
+
       - name: Build function
         run: sam build
 
