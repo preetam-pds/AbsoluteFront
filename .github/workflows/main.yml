@@ -30,7 +30,7 @@ jobs:
         run: sudo apt-get install make
 
       - name: update libselinux1
-        run: sudo apt-get update && sudo apt-get upgrade libselinux1
+        run: apt-cache search libselinux
 
       - name: Build function
         run: sam build
