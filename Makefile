@@ -21,6 +21,7 @@ build-lambda-common:
 	npm run build -- --build tsconfig-only-handler.json
 	cp -r dist "$(ARTIFACTS_DIR)/"
 
+
 build-RuntimeDependenciesLayer:
 	mkdir -p "$(ARTIFACTS_DIR)/nodejs"
 	cp package.json package-lock.json "$(ARTIFACTS_DIR)/nodejs/"
