@@ -32,6 +32,9 @@ jobs:
       - name: Install libselinux
         run: sudo apt-get install libselinux1
 
+      - name: copy files
+        run: cp -i /usr/local/aws-sam-cli/1.76.0/dist/libselinux.so.1 /customapp-backend1/customapp-backend
+
       - name: Build function
         run: sam build
 
