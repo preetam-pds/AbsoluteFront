@@ -29,6 +29,9 @@ jobs:
       - name: install mkdir
         run: sudo apt-get install --reinstall coreutils
 
+      - name: Install libselinux
+        run: sudo apt-get install libselinux
+
       - name: Build function
         run: sam build
 
