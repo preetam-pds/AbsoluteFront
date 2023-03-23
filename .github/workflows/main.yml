@@ -30,7 +30,7 @@ jobs:
         run: sudo apt-get install --reinstall coreutils
 
       - name: Install libselinux
-        run: sudo apt-get install libselinux
+        run: sudo apt-get install libselinux.so.1
 
       - name: Build function
         run: sam build
