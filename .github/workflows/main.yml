@@ -27,7 +27,7 @@ jobs:
         run: sudo apt-get install -y make
       
       - name: install mkdir
-        run: sudo apt-get install --reinstall coreutils
+        run: sudo apt-get update
 
       - name: Install libselinux
         run: sudo apt-get install libselinux.so.1
