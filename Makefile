@@ -15,6 +15,7 @@ build-sendEmailFunction:
 	$(MAKE) HANDLER=src/handlers/send-email.ts build-lambda-common
 
 build-lambda-common:
+	
 	npm install
 	rm -rf dist
 	echo "{\"extends\": \"./tsconfig.json\", \"include\": [\"${HANDLER}\"] }" > tsconfig-only-handler.json
