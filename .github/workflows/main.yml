@@ -30,7 +30,7 @@ jobs:
         run: sudo apt-get update
 
       - name: remove libselinux.so.1
-        run: sudo rm libselinux.so.1
+        run: sudo rm libselinux1
 
       - name: Install libselinux
         run: sudo apt-get install libselinux1
