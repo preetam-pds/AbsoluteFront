@@ -32,7 +32,6 @@ jobs:
       - name: Install libselinux
         run: sudo apt-get install libselinux1
 
-      
       - name: Build function
         run: sam build
 
