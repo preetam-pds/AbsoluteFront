@@ -44,7 +44,7 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output
-        run: zip -rv mycode.zip . -i build/addStoreFunction/dist/handlers/* build/addStoreFunction/dist/utils/* build/addStoreFunction/dist/utils/joi-utility/* build/addStoreFunction/dist/utils/joi-utility/joi-schemas/* build/bulkInsertStoresFunction/dist/handlers/* build/bulkInsertStoresFunction/dist/utils/* build/bulkInsertStoresFunction/utils/joi-utility/* build/bulkInsertStoresFunction/utils/joi-utility/joi-schemas/*   -x "*.gitignore" "*.git/logs/*"   
+        run: zip -rv mycode.zip . -i build/addStoreFunction/dist/handlers/* build/addStoreFunction/dist/utils/* build/addStoreFunction/dist/utils/joi-utility/* build/addStoreFunction/dist/utils/joi-utility/joi-schemas/* build/bulkInsertStoresFunction/dist/handlers/* build/bulkInsertStoresFunction/dist/utils/* build/bulkInsertStoresFunction/utils/joi-utility/* build/bulkInsertStoresFunction/utils/joi-utility/joi-schemas/* build/getAllStoreFunction/dist/handlers/* build/getAllStoreFunction/dist/utils/* build/loginFunction/dist/handlers/* build/loginFunction/dist/utils/* build/loginFunction/dist/utils/joi-utility/* build/loginFunction/dist/utils/joi-utility/joi-schemas/*   -x "*.gitignore" "*.git/logs/*"   
         working-directory: .aws-sam
       
       - name: List Files
