@@ -44,7 +44,7 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output
-        run: zip -rv mycode.zip . -i build/addStoreFunction/* build/bulkInsertStoresFunction/* build/getAllStoresFunction/* build/loginFunction/* build/sendEmailFunction/* build/updateStoreFunction/* build/RuntimeDependenciesLayer/* build/template.yaml   
+        run: zip -rv mycode.zip . -i build/addStoreFunction/* build/bulkInsertStoresFunction/* build/getAllStoresFunction/* build/loginFunction/* build/sendEmailFunction/* build/updateStoreFunction/* build/RuntimeDependenciesLayer/* build/template.yaml -x "*.git*"   
         working-directory: .aws-sam
       
       - name: List Files
