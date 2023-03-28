@@ -6,7 +6,7 @@ on:
       - test
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: eu-west-1
   LAMBDA_FUNCTION_NAME: Absolute
   ZIP_FILE_NAME: mycode.zip
 
@@ -44,7 +44,7 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output
-        run: zip -rv mycode.zip . -i build/AddStoreFunction/* build/BulkInsertStoresFunction/* build/GetAllStoresFunction/* build/LoginFunction/* build/template.yaml 
+        run: zip -rv mycode.zip . -i build/addStoreFunction/* build/bulkInsertStoresFunction/* build/getAllStoresFunction/* build/loginFunction/* build/sendEmailFunction/* build/updateStoreFunction/* build/RuntimeDependenciesLayer/* build/template.yaml   
         working-directory: .aws-sam
       
       - name: List Files
