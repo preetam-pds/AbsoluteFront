@@ -44,7 +44,7 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output
-        run: zip -rv mycode.zip . -i build/* -x "*.gitignore" "*.git/logs/*"   
+        run: zip -rv mycode.zip . -i build/RuntimeDependenciesLayer/* -x "*.gitignore" "*.git/logs/*"   
         working-directory: .aws-sam
       
       - name: List Files
