@@ -44,7 +44,7 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output
-        run: zip -rv mycode.zip . build/addStoreFunction/dist/handlers/* build/addStoreFunction/dist/utils/* build/addStoreFunction/dist/utils/joi-utility/* build/addStoreFunction/dist/utils/joi-utility/joi-schemas/* build/bulkInsertStoresFunction/dist/handlers/* build/bulkInsertStoresFunction/dist/utils/* build/bulkInsertStoresFunction/dist/utils/joi-utility/* build/bulkInsertStoresFunction/dist/utils/joi-utility/joi-schemas/* build/getAllStoresFunction/dist/handlers/* build/getAllStoresFunction/dist/utils/* build/loginFunction/dist/handlers/* build/loginFunction/dist/utils/* build/loginFunction/dist/utils/joi-utility/* build/loginFunction/dist/utils/joi-utility/joi-schemas/* build/sendEmailFunction/dist/handlers/* build/sendEmailFunction/dist/utils/* build/sendEmailFunction/dist/utils/email-utility/* build/sendEmailFunction/dist/utils/joi-utility/* build/sendEmailFunction/dist/utils/joi-utility/joi-schemas/* build/updateStoreFunction/dist/handlers/* build/updateStoreFunction/dist/utils/* build/updateStoreFunction/dist/utils/joi-utility/* build/updateStoreFunction/dist/utils/joi-utility/joi-schemas/* build/RuntimeDependenciesLayer/nodejs/* build/RuntimeDependenciesLayer/nodejs/node_modules/  -x "*.git*" -x "*.DS_Store"   
+        run: zip -rv mycode.zip . build/
         working-directory: .aws-sam
       
       - name: List Files
