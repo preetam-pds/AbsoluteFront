@@ -84,22 +84,22 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Update Lambda function code to addStoreFunction
-        run: aws lambda update-function-code --function-name Sample-App-addStoreFunction-JsxauxGV3Pdw --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode.zip
+        run: aws lambda update-function-code --function-name Sample-App-addStoreFunction-JsxauxGV3Pdw --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode.zip
 
       - name: Update Lambda function code to bulkInsertStoreFunction
-        run: aws lambda update-function-code --function-name Sample-App-bulkInsertStoresFunction-Bn3e9WFLDomh--no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode1.zip
+        run: aws lambda update-function-code --function-name Sample-App-bulkInsertStoresFunction-Bn3e9WFLDomh--no-cli-pager --publish --zip-file fileb://.aws-sam/mycode1.zip
 
       - name: Update Lambda function code to getAllstoreFunction
-        run: aws lambda update-function-code --function-name Sample-App-getAllStoresFunction-qVQsE9K0rqHC --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode2.zip
+        run: aws lambda update-function-code --function-name Sample-App-getAllStoresFunction-qVQsE9K0rqHC --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode2.zip
 
       - name: Update Lambda function code to loginfunction
-        run: aws lambda update-function-code --function-name Sample-App-loginFunction-4C6zsFQ1scy9 --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode3.zip
+        run: aws lambda update-function-code --function-name Sample-App-loginFunction-4C6zsFQ1scy9 --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode3.zip
 
       - name: Update Lambda function code to sendEmailFunction
-        run: aws lambda update-function-code --function-name Sample-App-sendEmailFunction-n94wPWt9CLkK --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode4.zip
+        run: aws lambda update-function-code --function-name Sample-App-sendEmailFunction-n94wPWt9CLkK --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode4.zip
 
       - name: Update Lambda function code to updateStoreFunction
-        run: aws lambda update-function-code --function-name Sample-App-updateStoreFunction-CAXAbwSOuY7J --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode5.zip
+        run: aws lambda update-function-code --function-name Sample-App-updateStoreFunction-CAXAbwSOuY7J --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode5.zip
 
 
 
