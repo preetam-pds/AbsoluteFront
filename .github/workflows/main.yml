@@ -6,7 +6,7 @@ on:
       - test
 
 env:
-  AWS_REGION: eu-west-1
+  AWS_REGION: ap-south-1
   LAMBDA_FUNCTION_NAME: Absolute
   ZIP_FILE_NAME: mycode.zip
   ZIP_FILE_NAME1: mycode1.zip
