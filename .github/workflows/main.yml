@@ -49,27 +49,27 @@ jobs:
         uses: montudor/action-zip@v1  
 
       - name: Zip output addStoreFunction
-        run: zip -rv mycode.zip . build/addStoreFunction/dist/
+        run: zip -rv mycode.zip ./build/addStoreFunction/dist/
         working-directory: .aws-sam
 
       - name: Zip output bulkInsertStoresFunction
-        run: zip -rv mycode1.zip . build/bulkInsertStoresFunction/dist/
+        run: zip -rv mycode1.zip ./build/bulkInsertStoresFunction/dist/
         working-directory: .aws-sam
 
       - name: Zip output getAllStoresFunction
-        run: zip -rv mycode2.zip . build/getAllStoresFunction/dist/
+        run: zip -rv mycode2.zip ./build/getAllStoresFunction/dist/
         working-directory: .aws-sam
 
       - name: Zip output loginFunction
-        run: zip -rv mycode3.zip . build/loginFunction/dist/
+        run: zip -rv mycode3.zip ./build/loginFunction/dist/
         working-directory: .aws-sam
       
       - name: Zip output sendEmailFunction
-        run: zip -rv mycode4.zip . build/sendEmailFunction/dist/
+        run: zip -rv mycode4.zip ./build/sendEmailFunction/dist/
         working-directory: .aws-sam
 
       - name: Zip output updateStoreFunction
-        run: zip -rv mycode5.zip . build/updateStoreFunction/dist/
+        run: zip -rv mycode5.zip ./build/updateStoreFunction/dist/
         working-directory: .aws-sam
       
       
