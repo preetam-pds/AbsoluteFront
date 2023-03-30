@@ -9,6 +9,11 @@ env:
   AWS_REGION: eu-west-1
   LAMBDA_FUNCTION_NAME: Absolute
   ZIP_FILE_NAME: mycode.zip
+  ZIP_FILE_NAME1: mycode1.zip
+  ZIP_FILE_NAME2: mycode2.zip
+  ZIP_FILE_NAME3: mycode3.zip
+  ZIP_FILE_NAME4: mycode4.zip
+  ZIP_FILE_NAME5: mycode5.zip
 
 jobs:
   deploy:
@@ -43,9 +48,30 @@ jobs:
       - name: Install zip
         uses: montudor/action-zip@v1  
 
-      - name: Zip output
-        run: zip -rv mycode.zip . build/
+      - name: Zip output addStoreFunction
+        run: zip -rv mycode.zip . build/addStoreFunction/
         working-directory: .aws-sam
+
+      - name: Zip output bulkInsertStoresFunction
+        run: zip -rv mycode1.zip . build/bulkInsertStoresFunction/
+        working-directory: .aws-sam
+
+      - name: Zip output getAllStoresFunction
+        run: zip -rv mycode2.zip . build/getAllStoresFunction/
+        working-directory: .aws-sam
+
+      - name: Zip output loginFunction
+        run: zip -rv mycode3.zip . build/loginFunction/
+        working-directory: .aws-sam
+      
+      - name: Zip output sendEmailFunction
+        run: zip -rv mycode4.zip . build/sendEmailFunction/
+        working-directory: .aws-sam
+
+      - name: Zip output updateStoreFunction
+        run: zip -rv mycode5.zip . build/updateStoreFunction/
+        working-directory: .aws-sam
+      
       
       - name: List Files
         run: cd .aws-sam && ls -all
@@ -57,6 +83,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Update Lambda function code
-        run: aws lambda update-function-code --function-name Absolute --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode.zip
+      - name: Update Lambda function code to addStoreFunction
+        run: aws lambda update-function-code --function-name Sample-App-addStoreFunction-JsxauxGV3Pdw --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode.zip
+
+      - name: Update Lambda function code to bulkInsertStoreFunction
+        run: aws lambda update-function-code --function-name Sample-App-bulkInsertStoresFunction-Bn3e9WFLDomh--no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode1.zip
+
+      - name: Update Lambda function code to getAllstoreFunction
+        run: aws lambda update-function-code --function-name Sample-App-getAllStoresFunction-qVQsE9K0rqHC --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode2.zip
+
+      - name: Update Lambda function code to loginfunction
+        run: aws lambda update-function-code --function-name Sample-App-loginFunction-4C6zsFQ1scy9 --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode3.zip
+
+      - name: Update Lambda function code to sendEmailFunction
+        run: aws lambda update-function-code --function-name Sample-App-sendEmailFunction-n94wPWt9CLkK --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode4.zip
+
+      - name: Update Lambda function code to updateStoreFunction
+        run: aws lambda update-function-code --function-name Sample-App-updateStoreFunction-CAXAbwSOuY7J --no-cli-pager --publish --zip-file fileb://.aws-sam/build/mycode5.zip
+
+
+
+      
+
+
+
          
