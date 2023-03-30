@@ -87,7 +87,7 @@ jobs:
         run: aws lambda update-function-code --function-name Sample-App-addStoreFunction-JsxauxGV3Pdw --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode.zip
 
       - name: Update Lambda function code to bulkInsertStoreFunction
-        run: aws lambda update-function-code --function-name Sample-App-bulkInsertStoresFunction-Bn3e9WFLDomh--no-cli-pager --publish --zip-file fileb://.aws-sam/mycode1.zip
+        run: aws lambda update-function-code --function-name Sample-App-bulkInsertStoresFunction-Bn3e9WFLDomh --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode1.zip
 
       - name: Update Lambda function code to getAllstoreFunction
         run: aws lambda update-function-code --function-name Sample-App-getAllStoresFunction-qVQsE9K0rqHC --no-cli-pager --publish --zip-file fileb://.aws-sam/mycode2.zip
